@@ -16,7 +16,7 @@ We are using the JSON with the `WGS84` coordinates. This is global coordinate sy
 
 #### Transform
 
-To transform the data to data usable by MySQL we create a script with the use of Grok AI to convert the data we need to CSV files. See [DATA.md](./road-accidents/DATA.md) for more info of the data.
+To transform the data to data usable by MySQL we create a script with the use of Grok AI to convert the data we need to CSV files. See the [road-accidents/README.md](./road-accidents/README.md) for more info of the data.
 
 The script is [convert.py](./road-accidents/convert.py).
 
@@ -49,6 +49,8 @@ In order to be able to set the accidents per canton in comparison with each othe
 
 The data we use is purely 2011-2024 (as the road accident dataset), all cantons, population of all genders and all citizenships by first and last day of the year.
 A interactive view is available online [here](https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-0102020000_101/px-x-0102020000_101/px-x-0102020000_101.px/) with our view [here](https://www.pxweb.bfs.admin.ch/sq/b92d1d67-c5f4-48b2-a89f-534db17c2881).
+
+Data description found at [population/README.md](./population/README.md)
 
 #### Transform
 
