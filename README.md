@@ -99,7 +99,7 @@ mysqlx_max_allowed_packet=1G
 
 ### Setup
 
-First we have to create a new database called `weathercrash`. Afterwards we import the data (which is in JSON) into the database.
+First we have to create a new database called `weathercrash`. Afterwards we import the data (which is in CSV, converted from JSON) into the database.
 
 ```sh
 # Create the "weathercrash" database
