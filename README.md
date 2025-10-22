@@ -31,7 +31,7 @@ The files created are:
 
 To import the data we have created a [import.sql](./road-accidents/import.sql) which:
 
-1. Set the database with `USE xxx;`
+1. Set the database with `USE weathercrash;`
 2. Create the tables with `CREATE TABLE IF NOT EXIST ...`
 3. Enable local file loading
 4. Load CSV files into DB with `LOAD LOCAL FILE ...`
