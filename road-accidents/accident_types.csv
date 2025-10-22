@@ -1,0 +1,12 @@
+uid,name_de,name_fr,name_it,name_en
+at0,Schleuder- oder Selbstunfall,dérapage ou perte de maîtrise,Incidente di sbandamento o per colpa propria,Accident with skidding or self-accident
+at00,Andere,autres,Altri,Other
+at1,Überholunfall oder Fahrstreifenwechsel,accident lors d'un dépassement ou lors d'un changement de voie de circulation,Incidente di sorpasso o al cambiamento di corsia,Accident when overtaking or changing lanes
+at2,Auffahrunfall,accident par tamponnement,Incidente di tamponamento,Accident with rear-end collision
+at3,Abbiegeunfall,accident en quittant une route,Incidente nello svoltare,Accident when turning left or right
+at4,Einbiegeunfall,accident en s'engageant sur une route,Incidente nell’immettersi in una strada,Accident when turning-into main road
+at5,Überqueren der Fahrbahn,accident en traversant une route,Incidente nell'attraversare la carreggiata,Accident when crossing the lane(s)
+at6,Frontalkollision,collision frontale,Collisione frontale,Accident with head-on collision
+at7,Parkierunfall,accident en parquant,Incidente nel parcheggiare,Accident when parking
+at8,Fussgängerunfall,accident impliquant des piétons,Incidente con pedoni,Accident involving pedestrian(s)
+at9,Tierunfall,accident impliquant des animaux,Incidente con animali,Accident involving animal(s)

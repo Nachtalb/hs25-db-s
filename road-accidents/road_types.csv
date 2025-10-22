@@ -1,0 +1,7 @@
+uid,name_de,name_fr,name_it,name_en
+rt430,Autobahn,autoroute,Autostrada,Motorway
+rt431,Autostrasse,semi-autoroute,Semiautostrada,Expressway
+rt432,Hauptstrasse,route principale,Strada principale,Principal road
+rt433,Nebenstrasse,route secondaire,Strada secondaria,Minor road
+rt434,Nebenanlage,installation annexe,Impianto accessorio,Motorway side installation
+rt439,andere,autre,Altro,Other
