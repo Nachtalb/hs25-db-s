@@ -12,7 +12,7 @@
 Our first datasource are official collected data about road accidents with people getting hurt by the Federal Roads Office: <https://data.geo.admin.ch/ch.astra.unfaelle-personenschaeden_alle/>
 
 To download it you have to first download a ZIP with the metadata. In which we find a README with the actual links to the datasets.
-We are using the JSON with the `WGS84` coordinates. This is global coordinate system. The other files use switzerland specific coordinate system `LV95`. As this is not widly supported and the calculation ot `WGS48` is a [hassle](https://de.wikipedia.org/wiki/Schweizer_Landeskoordinaten#Berechnungsgrundlagen), we chose the global one.
+We are using the JSON with the `WGS84` coordinates. This is the global coordinate system. The other files use the Switzerland specific coordinate system `LV95`. As this is not widly supported and the conversion to `WGS48` is a [hassle](https://de.wikipedia.org/wiki/Schweizer_Landeskoordinaten#Berechnungsgrundlagen), we chose the global one.
 
 #### Transform
 
@@ -31,7 +31,7 @@ The files created are:
 
 To import the data we have created a [import.sql](./road-accidents/import.sql) which:
 
-1. Set the database with `USE xxx;`
+1. Set the database with `USE weathercrash;`
 2. Create the tables with `CREATE TABLE IF NOT EXIST ...`
 3. Enable local file loading
 4. Load CSV files into DB with `LOAD LOCAL FILE ...`
@@ -45,10 +45,10 @@ mysqlsh --sql -u root -h localhost -f ./road-accidents/import.sql
 
 ### Population Numbers
 
-In order to be able to set the accidents per canton in comparison with each other we need to know the population per canton during the timeframeof the comparison. This data is provided to use by the Federal Statistics Office: [Demographic balance by canton](https://www.bfs.admin.ch/bfs/en/home/statistics/catalogues-databases.assetdetail.36074763.html)
+In order to be able to see the accidents per canton in comparison with each other we need to know the population per canton during the timeframe of the comparison. This data is provided to use by the Federal Statistics Office: [Demographic balance by canton](https://www.bfs.admin.ch/bfs/en/home/statistics/catalogues-databases.assetdetail.36074763.html)
 
 The data we use is purely 2011-2024 (as the road accident dataset), all cantons, population of all genders and all citizenships by first and last day of the year.
-A interactive view is available online [here](https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-0102020000_101/px-x-0102020000_101/px-x-0102020000_101.px/) with our view [here](https://www.pxweb.bfs.admin.ch/sq/b92d1d67-c5f4-48b2-a89f-534db17c2881).
+An interactive view is available online [here](https://www.pxweb.bfs.admin.ch/pxweb/en/px-x-0102020000_101/px-x-0102020000_101/px-x-0102020000_101.px/) with our view [here](https://www.pxweb.bfs.admin.ch/sq/b92d1d67-c5f4-48b2-a89f-534db17c2881).
 
 Data description found at [population/README.md](./population/README.md)
 
@@ -60,7 +60,7 @@ The data was then exported as CSV transformed to remove unused data (category co
 
 This is done using the [convert.py](./population/convert.py) script.
 
-Both the orignal as the transformed CSV are found here:
+Both the orignal and the transformed CSV are found here:
 
 - Original: [px-x-0102020000_101_20251021-165023.csv](./population/px-x-0102020000_101_20251021-165023.csv)
 - Transformed: [Population.csv](./population/Population.csv)
@@ -77,17 +77,15 @@ mysqlsh --sql -u root -h localhost -f ./population/import.sql
 
 ### Installation
 
-Server was installed via the installation file from the official website. During the installation you have to select the server and the client. While configuring the server after the installation make sure you have the creation of a Windows Service enabled.
+Server was installed via the installation file from the official website. During the installation you have to select the server and the client. While configuring the server, after the installation, make sure you have the creation of a Windows Service enabled.
 
-Choose a password that:
-
-- Password: `security101`
+We chose the password `security101`.
 
 ### Configuration
 
-To be able to import large files such as our traffic Database you have to change two settings in SQL.
+To be able to import large files such as our traffic database you have to change two settings on the MySQL server.
 
-- `max_packet_allowed` - Maximum size of a packet a client can send the server.
+- `max_packet_allowed` - Maximum size of a packet a client can send to the server.
 - `mysqlx_max_allowed_packet` - X Plugin equivalent of `max_allowed_packet`. Used for the json import util.
 
 Change these in the default configuration file at: `sudo nvim 'C:\ProgramData\MySQL\MySQL Server 8.0\my.ini'`
@@ -101,7 +99,7 @@ mysqlx_max_allowed_packet=1G
 
 ### Setup
 
-First we have to create a new database called `weathercrash`. Afterwards import the json into the database.
+First we have to create a new database called `weathercrash`. Afterwards we import the data (which is in CSV, converted from JSON) into the database.
 
 ```sh
 # Create the "weathercrash" database
@@ -142,6 +140,6 @@ Setup a new user. In our case:
 
 ### Connect to DB
 
-In order to connect to the database you have to allow jdbc to fetch the RSA public key from the server.
+In order to connect to the database you have to allow `jdbc` to fetch the RSA public key from the server.
 
-Expand the additional setting in the bottom and add this to the jdbc connection options: `allowPublicKeyRetrieval=true`
+Expand the additional setting in the bottom and add this to the `jdbc` connection options: `allowPublicKeyRetrieval=true`
