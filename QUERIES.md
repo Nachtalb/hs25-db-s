@@ -4,7 +4,7 @@
 
 ⚠️ Not adjusted to population size per canton in relations to others. Just a total per canton.
 
-Visualize with an Area graph. Keep default settings.
+Visualized with an Area graph. Keep default settings.
 
 ```sql
 SELECT
