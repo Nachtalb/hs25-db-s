@@ -52,20 +52,9 @@ An interactive view is available online [here](https://www.pxweb.bfs.admin.ch/px
 
 Data description found at [population/README.md](./population/README.md)
 
-#### Transform
-
-The data was then exported as CSV transformed to remove unused data (category col, sex col, and "No Indication" rows which were emtpy anyway).
-
-⚠️ The downloaded CSV is encoded as `ISO-8859-1` not `UTF-8`. The transformed CSV is `UTF-8` encoded.
-
-This is done using the [convert.py](./population/convert.py) script.
-
-Both the orignal and the transformed CSV are found here:
-
-- Original: [px-x-0102020000_101_20251021-165023.csv](./population/px-x-0102020000_101_20251021-165023.csv)
-- Transformed: [Population.csv](./population/Population.csv)
-
 #### Import
+
+During the import we create an intermediate table containing the raw downloaded data. This is imported using the local file in SQL functionality. Afterwards we import this data from the `population_raw` table with transformations on the fly into the new final `population` table.
 
 To import it use:
 
