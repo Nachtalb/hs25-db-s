@@ -44,8 +44,6 @@ CREATE TABLE accidents_raw (
 
 SET GLOBAL local_infile = 1;
 
--- Note: The CSV has a UTF-8 BOM; MySQL handles this with CHARACTER SET utf8mb4.
--- If the BOM causes issues with the first column, strip it before import.
 LOAD DATA LOCAL INFILE 'hs25-db-s/road-accidents/RoadTrafficAccidentLocations.csv'
 INTO TABLE accidents_raw
 CHARACTER SET utf8mb4
@@ -53,9 +51,7 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
--- ============================================================
--- Step 2: Extract lookup tables from raw data
--- ============================================================
+-- Extract lookup tables from raw data
 
 DROP TABLE IF EXISTS accident_types;
 DROP TABLE IF EXISTS severity_categories;
@@ -112,8 +108,7 @@ SELECT DISTINCT
     RoadType_en
 FROM accidents_raw;
 
--- ============================================================
--- Step 3: Create accidents table with computed timestamps
+-- Create accidents table with computed timestamps
 --
 -- Timestamp logic:
 --   Find the first day in (year, month) matching the weekday,
@@ -122,7 +117,6 @@ FROM accidents_raw;
 --   MySQL DAYOFWEEK(): 1=Sunday, 2=Monday, ..., 7=Saturday
 --   offset = (target_dow - DAYOFWEEK(first_of_month) + 7) % 7
 --   first_matching_day = 1 + offset
--- ============================================================
 
 DROP TABLE IF EXISTS accidents;
 
@@ -197,9 +191,7 @@ INNER JOIN (
 ) weekday_map ON r.AccidentWeekDay_en = weekday_map.name
 ;
 
--- ============================================================
--- Step 4: Clean up
--- ============================================================
+-- Clean up
 
 DROP TABLE IF EXISTS accidents_raw;
 
