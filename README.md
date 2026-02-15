@@ -12,32 +12,11 @@
 Our first datasource are official collected data about road accidents with people getting hurt by the Federal Roads Office: <https://data.geo.admin.ch/ch.astra.unfaelle-personenschaeden_alle/>
 
 To download it you have to first download a ZIP with the metadata. In which we find a README with the actual links to the datasets.
-We are using the JSON with the `WGS84` coordinates. This is the global coordinate system. The other files use the Switzerland specific coordinate system `LV95`. As this is not widly supported and the conversion to `WGS48` is a [hassle](https://de.wikipedia.org/wiki/Schweizer_Landeskoordinaten#Berechnungsgrundlagen), we chose the global one.
+We are using the CSV file with the Swiss LV95 coordinates. 
 
 #### Transform
 
-To transform the data to data usable by MySQL we create a script with the use of Grok AI to convert the data we need to CSV files. See the [road-accidents/README.md](./road-accidents/README.md) for more info of the data.
-
-The script is [convert.py](./road-accidents/convert.py).
-
-The files created are:
-
-- [accidents.csv](./road-accidents/accidents.csv)
-- [accident_types.csv](./road-accidents/accident_types.csv)
-- [road_types.csv](./road-accidents/road_types.csv)
-- [severity_categories.csv](./road-accidents/severity_categories.csv)
-
-#### Import
-
-To import the data we have created a [import.sql](./road-accidents/import.sql) which:
-
-1. Set the database with `USE weathercrash;`
-2. Create the tables with `CREATE TABLE IF NOT EXIST ...`
-3. Enable local file loading
-4. Load CSV files into DB with `LOAD LOCAL FILE ...`
-5. Disable local file loading
-
-Use this command to execute the file:
+We transform all the data in the import sql script.
 
 ```sh
 mysqlsh --sql -u root -h localhost -f ./road-accidents/import.sql
